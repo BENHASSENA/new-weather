@@ -30,9 +30,9 @@
       <p v-else>It's night <img alt="Vue logo" src="./assets/lune.png"></p>
   </div>
      
-     <div>
+     <!-- <div>
        <h2>{{dayli.temperature}}°C</h2>
-     </div>
+     </div> -->
   </div>
 
  
@@ -59,27 +59,27 @@ name: 'App',
       },
     }
   },
-    data2() {
-          return {
-              dayli: {
-              temperature: 0,
-            }
-          }
-    },    
+    // data2() {
+    //       return {
+    //           dayli: {
+    //           temperature: 0,
+    //         }
+    //       }
+    // },    
 
 
   methods: {
     getWeather: async function() {
       console.log(this.citySearch);
       const key = "ec80fe5c759a7923eb1c40f97cf4d4bf";
-      const callURL = `http://api.openweathermap.org/data/2.5/weather?q=${this.citySearch}&appid=${key}&units=metric`;
+      const callURL = `https://api.openweathermap.org/data/2.5/weather?q=${this.citySearch}&appid=${key}&units=metric`;
       
       //? APPEL A l'API avec un await dans un try 
       try {
         const response = await fetch(callURL);
         const data = await response.json();
         console.log(data);
-        this.citySearch = "";
+        this.citySearch = " ";
         this.weather.cityName = data.name; 
         this.weather.country = data.sys.country;
         this.weather.temperature = Math.round(data.main.temp);
@@ -90,13 +90,13 @@ name: 'App',
         this.weather.humidity = Math.round(data.main.humidity);
         this.searchResult = true;
 
-        const lat = data.coord.lat;
-        const lon = data.coord.lon;
-        const secondCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely&appid=${key}&units=metric`;
-        const response2 = await fetch(secondCall);
-        const data2 = await response2.json();
-        console.log({data2});
-        this.dayli.temperature = Math.round(data2.daily[0].temp);
+        // const lat = data.coord.lat;
+        // const lon = data.coord.lon;
+        // const secondCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely&appid=${key}&units=metric`;
+        // const response2 = await fetch(secondCall);
+        // const data2 = await response2.json();
+        // console.log({data2});
+        // this.dayli.temperature = Math.round(data2.daily[0].temp);
 
         //check if it's daytime or nighttime or
         const dayNight = data.weather[0].icon;
@@ -119,14 +119,7 @@ name: 'App',
 </script>
 
 <style>
-/* #app { */
-  /* font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-} */
+
 
 *{
   margin: 0;
